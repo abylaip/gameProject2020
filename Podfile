@@ -10,5 +10,7 @@ target 'gameProject' do
     pod 'AlamofireImage', '~> 3.5'
     pod 'IQKeyboardManagerSwift'
     pod 'PaginatedTableView'
+    pod 'SwiftPhoneNumberFormatter'
+
 
 end

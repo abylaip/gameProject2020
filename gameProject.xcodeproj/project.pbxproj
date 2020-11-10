@@ -19,6 +19,7 @@
 		432A4AE3248A3FBA00F87345 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE2248A3FBA00F87345 /* ActivityViewController.swift */; };
 		432A4AE5248A3FC800F87345 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE4248A3FC800F87345 /* ProfileViewController.swift */; };
 		432A4AE8248A5DF800F87345 /* gameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE7248A5DF800F87345 /* gameCell.swift */; };
+		432D0075255956D100405660 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432D0074255956D100405660 /* SignInViewController.swift */; };
 		4342FA6424D829D8009BC0BA /* upGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342FA6324D829D8009BC0BA /* upGameCell.swift */; };
 		4342FA6624D831A3009BC0BA /* upFavCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342FA6524D831A3009BC0BA /* upFavCell.swift */; };
 		4342FA6824D921C7009BC0BA /* downArcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342FA6724D921C7009BC0BA /* downArcCell.swift */; };
@@ -48,6 +49,7 @@
 		432A4AE2248A3FBA00F87345 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		432A4AE4248A3FC800F87345 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		432A4AE7248A5DF800F87345 /* gameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameCell.swift; sourceTree = "<group>"; };
+		432D0074255956D100405660 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4342FA6324D829D8009BC0BA /* upGameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = upGameCell.swift; sourceTree = "<group>"; };
 		4342FA6524D831A3009BC0BA /* upFavCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = upFavCell.swift; sourceTree = "<group>"; };
 		4342FA6724D921C7009BC0BA /* downArcCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = downArcCell.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				432A4AE4248A3FC800F87345 /* ProfileViewController.swift */,
 				43DB179F24A0A604003AB198 /* GameViewController.swift */,
 				43F5349624F02F3B00A38F3B /* SecondProfileViewController.swift */,
+				432D0074255956D100405660 /* SignInViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -176,7 +179,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = Abyl;
 				TargetAttributes = {
 					432A4AC0248A3E8F00F87345 = {
@@ -270,6 +273,7 @@
 				4342FA6424D829D8009BC0BA /* upGameCell.swift in Sources */,
 				432A4AE8248A5DF800F87345 /* gameCell.swift in Sources */,
 				432A4ADF248A3F9600F87345 /* HomeViewController.swift in Sources */,
+				432D0075255956D100405660 /* SignInViewController.swift in Sources */,
 				432A4ACF248A3E8F00F87345 /* gameProject.xcdatamodeld in Sources */,
 				432A4AC5248A3E8F00F87345 /* AppDelegate.swift in Sources */,
 				4342FA6624D831A3009BC0BA /* upFavCell.swift in Sources */,
@@ -332,6 +336,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -392,6 +397,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
