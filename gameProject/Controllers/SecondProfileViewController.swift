@@ -114,6 +114,17 @@ final class SecondProfileViewController: UIViewController, UITableViewDelegate, 
         blurEffectView.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
         blurEffectView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
     }
+    
+    @IBAction func didLogOut(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let secondVC = storyboard.instantiateViewController(identifier: "SignInViewController")
+                
+        secondVC.modalPresentationStyle = .fullScreen
+        secondVC.modalTransitionStyle = .flipHorizontal
+                
+        present(secondVC, animated: true, completion: nil)
+    }
+    
 }
 
 extension SecondProfileViewController: UIScrollViewDelegate {

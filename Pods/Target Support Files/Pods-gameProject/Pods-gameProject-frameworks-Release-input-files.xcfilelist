@@ -1,5 +1,9 @@
 ${PODS_ROOT}/Target Support Files/Pods-gameProject/Pods-gameProject-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
+${BUILT_PRODUCTS_DIR}/AssetsPickerViewController/AssetsPickerViewController.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
 ${BUILT_PRODUCTS_DIR}/PaginatedTableView/PaginatedTableView.framework
+${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
+${BUILT_PRODUCTS_DIR}/SwiftPhoneNumberFormatter/SwiftPhoneNumberFormatter.framework

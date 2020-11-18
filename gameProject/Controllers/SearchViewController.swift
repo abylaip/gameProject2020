@@ -138,6 +138,25 @@ class SearchViewController: UIViewController, PaginatedTableViewDelegate, Pagina
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
+//        let first10 = String(games[indexPath.row].createdAt.prefix(10))
+//        vc?.date = first10
+//        vc?.name = games[indexPath.row].name
+//        vc?.genre = games[indexPath.row].genres.joined(separator: ", ")
+//
+//        self.navigationController?.pushViewController(vc!, animated: true)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "SellGameViewController")
+        let secondVC = UINavigationController(rootViewController: vc)
+
+
+        secondVC.modalPresentationStyle = .fullScreen
+        secondVC.modalTransitionStyle = .crossDissolve
+        self.navigationController?.present(secondVC, animated: true, completion: nil)
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchItem = (searchGame.text?.lowercased())!
         //print(searchItem)

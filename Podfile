@@ -11,6 +11,8 @@ target 'gameProject' do
     pod 'IQKeyboardManagerSwift'
     pod 'PaginatedTableView'
     pod 'SwiftPhoneNumberFormatter'
+    pod 'AssetsPickerViewController', '~> 2.0'
+    pod 'PhoneNumberKit', '~> 3.3'
 
 
 end

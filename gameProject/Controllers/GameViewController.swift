@@ -23,9 +23,9 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        gameName.text = name
-        gameGenre.text = genre
-        gameDate.text = date
+//        gameName.text = name
+//        gameGenre.text = genre
+//        gameDate.text = date
         // Do any additional setup after loading the view.
     }
     
