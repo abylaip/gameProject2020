@@ -19,7 +19,14 @@ class downSetCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+//        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let secondVC = storyboard.instantiateViewController(identifier: "ViewController")
+//                    
+//        secondVC.modalPresentationStyle = .fullScreen
+//        secondVC.modalTransitionStyle = .coverVertical
+//                    
+//        present(secondVC, animated: true, completion: nil)
         // Configure the view for the selected state
     }
 

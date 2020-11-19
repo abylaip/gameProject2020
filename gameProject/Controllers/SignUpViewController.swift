@@ -10,10 +10,16 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet var fullNameTextField: UITextField!
+    @IBOutlet var phoneNumberTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        phoneNumberTextField.text = "+7"
+        
+        phoneNumberTextField.delegate = self
+        phoneNumberTextField.keyboardType = .numberPad
     }
     
     @IBAction func didSignUp(_ sender: Any) {//to Sign In Page
@@ -25,15 +31,27 @@ class SignUpViewController: UIViewController {
                 
         present(secondVC, animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension SignUpViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let text = textField.text!
+        let spaceIndex = [2, 6, 10, 13]
+        
+
+        if text == "+7" && string == "" {
+            return false
+        }
+
+        if text.count == 16 && string != "" {
+            return false
+        }
+
+        if spaceIndex.contains(textField.text!.count) && string != "" {
+            textField.text!.append("-")
+        }
+        
+        return true
     }
-    */
-
 }

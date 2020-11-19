@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  SearchViewController.swift
 //  gameProject
 //
 //  Created by Abyl on 6/5/20.
@@ -10,23 +10,16 @@ import UIKit
 import AlamofireImage
 import PaginatedTableView
 
-struct jsonFile: Decodable {
-    let data: [MyData]
+struct fileJSON: Decodable {
+    let data: [dataMy]
 }
 
-struct MyData: Decodable {
+struct dataMy: Decodable {
     let name: String
     let genres: [String]
-    let createdAt: String
-    let size: [Size]
 }
 
-struct Size: Decodable {
-    let unit: String
-    let value: Double
-}
-
-class HomeViewController: UIViewController, PaginatedTableViewDelegate, PaginatedTableViewDataSource {
+class HomeViewController: UIViewController, PaginatedTableViewDelegate, PaginatedTableViewDataSource, UISearchBarDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         70
     }
@@ -36,26 +29,37 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
     }
     
     
+    @IBOutlet var searchGame: UISearchBar!
     @IBOutlet var contentTableView: PaginatedTableView!
-
-    var games = [MyData]()
+    
+    var games = [dataMy]()
+    var filteredData: [String]!
+    var searchItem: String = ""
+    
     
     var refreshControl = UIRefreshControl()
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+                    
         refresh(sender: refreshControl)
         
         contentTableView.paginatedDelegate = self
         contentTableView.paginatedDataSource = self
+        searchGame.delegate = self
         
 //        refreshControl.attributedTitle = NSAttributedString(string: " ")
 //        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
 //        contentTableView.addSubview(refreshControl)
-     
+        
         contentTableView.loadData(refresh: true)
     }
+    
+    
     
     @objc func refresh(sender:AnyObject) {
         downloadJSON(pageNumber: 1, completion: { [weak self] _ in
@@ -65,8 +69,8 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
     }
     
     func downloadJSON(pageNumber: Int, completion: ((_ sucess: Bool) -> Void)? ) {
-        let url = URL(string: "http://199.247.31.99:4000/api/global-games?page=\(pageNumber)&limit=10")
-
+        let url = URL(string: "http://199.247.31.99:4000/api/global-games?search=\(searchItem)&page=\(pageNumber)&limit=10")
+        print(searchItem)
         guard let downloadURL = url else {return}
         
         URLSession.shared.dataTask(with: downloadURL) { (data, urlResponse, error) in
@@ -75,7 +79,7 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
                             
                 do {
                     let decoder = JSONDecoder()
-                    let gamess = try decoder.decode(jsonFile.self, from: data)
+                    let gamess = try decoder.decode(fileJSON.self, from: data)
                     if pageNumber == 1 {
                             self.games = gamess.data
                     } else {
@@ -104,7 +108,7 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
                 onError?(NSError(domain: "Unknown error", code: 101, userInfo: [:]))
             }
         }
-        // else append the data to list
+//         else append the data to list
 //        self.list.append(apiResponseList)
         
         // If Api responds with error
@@ -120,29 +124,40 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! gameCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! searchCell
 
 //        var src = games[indexPath.row].photos[0].src
 //        src = src.replacingOccurrences(of: "public/", with: "")
         let url = URL(string: "https://bit.ly/2ZPFrgu")!
 
-        cell.gameImage.layer.cornerRadius = 10
-        cell.gameImage.af_setImage(withURL: url)
-        cell.gameName.text = games[indexPath.row].name
-        cell.gameGenre.text = games[indexPath.row].genres.joined(separator: ", ")
+        cell.searchImage.layer.cornerRadius = 10
+        cell.searchImage.af_setImage(withURL: url)
+        cell.searchName.text = games[indexPath.row].name
+        cell.searchGenre.text = games[indexPath.row].genres.joined(separator: ", ")
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
-        let first10 = String(games[indexPath.row].createdAt.prefix(10))
-        vc?.date = first10
-        vc?.name = games[indexPath.row].name
-        vc?.genre = games[indexPath.row].genres.joined(separator: ", ")
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
+//        let first10 = String(games[indexPath.row].createdAt.prefix(10))
+//        vc?.date = first10
+//        vc?.name = games[indexPath.row].name
+//        vc?.genre = games[indexPath.row].genres.joined(separator: ", ")
+//
+//        self.navigationController?.pushViewController(vc!, animated: true)
         
-        self.navigationController?.pushViewController(vc!, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "SellGameViewController")
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchItem = (searchGame.text?.lowercased())!
+        //print(searchItem)
+        refresh(sender: refreshControl)
+
+    }
     
 }

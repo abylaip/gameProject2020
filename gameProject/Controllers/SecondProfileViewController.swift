@@ -89,6 +89,17 @@ final class SecondProfileViewController: UIViewController, UITableViewDelegate, 
         return UITableViewCell()
         
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if tableView == downTableView {
+//            let cell = downTableView.dequeueReusableCell(withIdentifier: "downSetCell", for: indexPath) as! downSetCell
+//            if cell.isSelected {
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let vc = storyboard.instantiateViewController(identifier: "SettingsViewController")
+//                self.navigationController?.isNavigationBarHidden = false
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
+    }
     
     
     
