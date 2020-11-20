@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		430A06A32566757900F2632E /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A06A22566757900F2632E /* UsersListViewController.swift */; };
+		430A06A82566FD7700F2632E /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A06A72566FD7700F2632E /* SignUp.swift */; };
+		430A06B42567224A00F2632E /* SingletonClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A06B32567224A00F2632E /* SingletonClass.swift */; };
 		432A4AC5248A3E8F00F87345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AC4248A3E8F00F87345 /* AppDelegate.swift */; };
 		432A4AC7248A3E8F00F87345 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AC6248A3E8F00F87345 /* SceneDelegate.swift */; };
 		432A4ACC248A3E8F00F87345 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 432A4ACA248A3E8F00F87345 /* Main.storyboard */; };
@@ -18,7 +21,7 @@
 		432A4AE1248A3FA700F87345 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE0248A3FA700F87345 /* HomeViewController.swift */; };
 		432A4AE3248A3FBA00F87345 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE2248A3FBA00F87345 /* ActivityViewController.swift */; };
 		432A4AE5248A3FC800F87345 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE4248A3FC800F87345 /* ProfileViewController.swift */; };
-		432A4AE8248A5DF800F87345 /* gameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE7248A5DF800F87345 /* gameCell.swift */; };
+		432A4AE8248A5DF800F87345 /* HoldersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432A4AE7248A5DF800F87345 /* HoldersCell.swift */; };
 		432D0075255956D100405660 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432D0074255956D100405660 /* SignInViewController.swift */; };
 		4342FA6424D829D8009BC0BA /* upGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342FA6324D829D8009BC0BA /* upGameCell.swift */; };
 		4342FA6624D831A3009BC0BA /* upFavCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4342FA6524D831A3009BC0BA /* upFavCell.swift */; };
@@ -39,6 +42,9 @@
 
 /* Begin PBXFileReference section */
 		16CB6830E98342E4E4D9A537 /* Pods-gameProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gameProject.release.xcconfig"; path = "Target Support Files/Pods-gameProject/Pods-gameProject.release.xcconfig"; sourceTree = "<group>"; };
+		430A06A22566757900F2632E /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
+		430A06A72566FD7700F2632E /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		430A06B32567224A00F2632E /* SingletonClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonClass.swift; sourceTree = "<group>"; };
 		432A4AC1248A3E8F00F87345 /* gameProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gameProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		432A4AC4248A3E8F00F87345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		432A4AC6248A3E8F00F87345 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +58,7 @@
 		432A4AE0248A3FA700F87345 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		432A4AE2248A3FBA00F87345 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		432A4AE4248A3FC800F87345 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		432A4AE7248A5DF800F87345 /* gameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameCell.swift; sourceTree = "<group>"; };
+		432A4AE7248A5DF800F87345 /* HoldersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldersCell.swift; sourceTree = "<group>"; };
 		432D0074255956D100405660 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4342FA6324D829D8009BC0BA /* upGameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = upGameCell.swift; sourceTree = "<group>"; };
 		4342FA6524D831A3009BC0BA /* upFavCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = upFavCell.swift; sourceTree = "<group>"; };
@@ -84,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		430A06A62566FD6A00F2632E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				430A06A72566FD7700F2632E /* SignUp.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		432A4AB8248A3E8F00F87345 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +119,7 @@
 		432A4AC3248A3E8F00F87345 /* gameProject */ = {
 			isa = PBXGroup;
 			children = (
+				430A06A62566FD6A00F2632E /* Models */,
 				432A4ADD248A3F7800F87345 /* Controllers */,
 				432A4AC4248A3E8F00F87345 /* AppDelegate.swift */,
 				432A4AC6248A3E8F00F87345 /* SceneDelegate.swift */,
@@ -114,7 +129,7 @@
 				432A4AD5248A3E9100F87345 /* Info.plist */,
 				432A4ACD248A3E8F00F87345 /* gameProject.xcdatamodeld */,
 				432A4ADB248A3F4300F87345 /* ViewController.swift */,
-				432A4AE7248A5DF800F87345 /* gameCell.swift */,
+				432A4AE7248A5DF800F87345 /* HoldersCell.swift */,
 				43FEFF1F249A369400B4F3C6 /* searchCell.swift */,
 				437D4B2324BB743E007A61DB /* MGCell.swift */,
 				437D4B2524BB744F007A61DB /* FavCell.swift */,
@@ -124,6 +139,7 @@
 				4342FA6924D921DF009BC0BA /* downSetCell.swift */,
 				4342FA6B24D921F7009BC0BA /* downHelCell.swift */,
 				436345C22563C7580073DB6E /* activityNavigationViewController.swift */,
+				430A06B32567224A00F2632E /* SingletonClass.swift */,
 			);
 			path = gameProject;
 			sourceTree = "<group>";
@@ -141,6 +157,7 @@
 				43979C24255B443F006290DC /* SignUpViewController.swift */,
 				436345E725640BCA0073DB6E /* SellGameViewController.swift */,
 				436345EB256539600073DB6E /* SettingsViewController.swift */,
+				430A06A22566757900F2632E /* UsersListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -283,7 +300,7 @@
 				43FEFF20249A369400B4F3C6 /* searchCell.swift in Sources */,
 				4342FA6C24D921F7009BC0BA /* downHelCell.swift in Sources */,
 				4342FA6424D829D8009BC0BA /* upGameCell.swift in Sources */,
-				432A4AE8248A5DF800F87345 /* gameCell.swift in Sources */,
+				432A4AE8248A5DF800F87345 /* HoldersCell.swift in Sources */,
 				436345C32563C7580073DB6E /* activityNavigationViewController.swift in Sources */,
 				432A4ADF248A3F9600F87345 /* HomeOneViewController.swift in Sources */,
 				432D0075255956D100405660 /* SignInViewController.swift in Sources */,
@@ -294,11 +311,14 @@
 				437D4B2424BB743E007A61DB /* MGCell.swift in Sources */,
 				4342FA6824D921C7009BC0BA /* downArcCell.swift in Sources */,
 				43979C25255B443F006290DC /* SignUpViewController.swift in Sources */,
+				430A06A32566757900F2632E /* UsersListViewController.swift in Sources */,
 				432A4ADC248A3F4300F87345 /* ViewController.swift in Sources */,
 				437D4B2624BB744F007A61DB /* FavCell.swift in Sources */,
 				432A4AE5248A3FC800F87345 /* ProfileViewController.swift in Sources */,
 				436345E825640BCA0073DB6E /* SellGameViewController.swift in Sources */,
 				43DB17A024A0A604003AB198 /* GameViewController.swift in Sources */,
+				430A06A82566FD7700F2632E /* SignUp.swift in Sources */,
+				430A06B42567224A00F2632E /* SingletonClass.swift in Sources */,
 				432A4AC7248A3E8F00F87345 /* SceneDelegate.swift in Sources */,
 				436345EC256539600073DB6E /* SettingsViewController.swift in Sources */,
 			);

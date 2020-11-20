@@ -30,6 +30,12 @@ class GameViewController: UIViewController {
     }
     
 
+    @IBAction func toHoldersList(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "UsersListViewController")
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     /*
     // MARK: - Navigation
 

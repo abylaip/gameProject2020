@@ -8,11 +8,11 @@
 
 import UIKit
 
-class gameCell: UITableViewCell {
+class HoldersCell: UITableViewCell {
 
-    @IBOutlet var gameImage: UIImageView!
-    @IBOutlet var gameName: UILabel!
-    @IBOutlet var gameGenre: UILabel!
+    @IBOutlet var holderImage: UIImageView!
+    @IBOutlet var holderName: UILabel!
+    @IBOutlet var holderNumber: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

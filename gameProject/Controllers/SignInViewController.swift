@@ -44,11 +44,12 @@ class SignInViewController: UIViewController {
     @IBAction func didSignIn(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let secondVC = storyboard.instantiateViewController(identifier: "ViewController")
-                
+            
         secondVC.modalPresentationStyle = .fullScreen
-        secondVC.modalTransitionStyle = .coverVertical
+        secondVC.modalTransitionStyle = .crossDissolve
                 
         present(secondVC, animated: true, completion: nil)
+
 
     }
 //    func getPhone() -> String{

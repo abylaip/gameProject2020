@@ -15,7 +15,8 @@ struct fileJSON: Decodable {
 }
 
 struct dataMy: Decodable {
-    let name: String
+    let logo: String
+    let title: String
     let genres: [String]
 }
 
@@ -69,7 +70,7 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
     }
     
     func downloadJSON(pageNumber: Int, completion: ((_ sucess: Bool) -> Void)? ) {
-        let url = URL(string: "http://199.247.31.99:4000/api/global-games?search=\(searchItem)&page=\(pageNumber)&limit=10")
+        let url = URL(string: "http://188.130.160.190:3000/api/games?search=\(searchItem)&page=\(pageNumber)&size=10")
         print(searchItem)
         guard let downloadURL = url else {return}
         
@@ -128,12 +129,12 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
 
 //        var src = games[indexPath.row].photos[0].src
 //        src = src.replacingOccurrences(of: "public/", with: "")
-        let url = URL(string: "https://bit.ly/2ZPFrgu")!
-
-        cell.searchImage.layer.cornerRadius = 10
-        cell.searchImage.af_setImage(withURL: url)
-        cell.searchName.text = games[indexPath.row].name
-        cell.searchGenre.text = games[indexPath.row].genres.joined(separator: ", ")
+//        let url = URL(string: "https://bit.ly/2ZPFrgu")!
+//
+//        cell.searchImage.layer.cornerRadius = 10
+//        cell.searchImage.af_setImage(withURL: url)
+//        cell.searchName.text = games[indexPath.row].title
+//        cell.searchGenre.text = games[indexPath.row].genres.joined(separator: ", ")
 
         return cell
     }
@@ -148,7 +149,7 @@ class HomeViewController: UIViewController, PaginatedTableViewDelegate, Paginate
 //        self.navigationController?.pushViewController(vc!, animated: true)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "SellGameViewController")
+        let vc = storyboard.instantiateViewController(identifier: "GameViewController")
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.pushViewController(vc, animated: true)
     }

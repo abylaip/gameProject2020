@@ -1,5 +1,5 @@
 //
-//  ActivityViewController.swift
+//  SearchViewController.swift
 //  gameProject
 //
 //  Created by Abyl on 6/5/20.
@@ -7,128 +7,151 @@
 //
 
 import UIKit
-import Photos
-import AssetsPickerViewController
+import AlamofireImage
+import PaginatedTableView
 
-class ActivityViewController: UIViewController, UITextViewDelegate {
+struct jsonFile: Decodable {
+    let data: [MyData]
+}
+
+struct MyData: Decodable {
+    let name: String
+    let genres: [String]
+}
+
+class ActivityViewController: UIViewController, PaginatedTableViewDelegate, PaginatedTableViewDataSource, UISearchBarDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        70
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    @IBOutlet var searchGame: UISearchBar!
+    @IBOutlet var contentTableView: PaginatedTableView!
+    
+    var games = [MyData]()
+    var filteredData: [String]!
+    var searchItem: String = ""
     
     
+    var refreshControl = UIRefreshControl()
 
-    @IBOutlet var gameName: UITextField!
-    @IBOutlet var gameGenre: UITextField!
-    @IBOutlet var gameDescription: UITextView!
-    @IBOutlet var orderMode: UISegmentedControl!
-    @IBOutlet var gamePrice: UITextField!
-    @IBOutlet var uploadedImage: UIImageView!
+    override func viewWillAppear(_ animated: Bool) {
+//        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        gameDescription.delegate = self
-        gameDescription.text = "description of the game"
-        gameDescription.textColor = .lightGray
-        // Do any additional setup after loading the view.
-    }
-    
-    func textViewDidBeginEditing(_ gameDescription: UITextView) {
-        if gameDescription.textColor == UIColor.lightGray {
-            gameDescription.text = nil
-            gameDescription.textColor = UIColor.black
-        }
-    }
-    func textViewDidEndEditing(_ gameDescription: UITextView) {
-        if gameDescription.text.isEmpty {
-            gameDescription.text = "description of the game"
-            gameDescription.textColor = UIColor.lightGray
-        }
-    }
-    
-    @IBAction func uploadImageButton(_ sender: Any) {
-        let picker = AssetsPickerViewController()
-        picker.pickerDelegate = self
-        present(picker, animated: true, completion: nil)
-    }
-    
-    @IBAction func publishButton(_ sender: Any) {
-    }
-    
-    func createBodyWithParameters(parameters: [String: AnyHashable]?, filePathKey: String?, imageDataKey: Data, boundary: String) -> Data {
-        let body = NSMutableData()
+                    
+        refresh(sender: refreshControl)
         
-        if parameters != nil {
-            for (key, value) in parameters! {
-                
-                body.append("--\(boundary)\r\n".data(using: .utf8)!)
-                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
-                body.append("\(value)\r\n".data(using: .utf8)!)
+        contentTableView.paginatedDelegate = self
+        contentTableView.paginatedDataSource = self
+        searchGame.delegate = self
+        
+//        refreshControl.attributedTitle = NSAttributedString(string: " ")
+//        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+//        contentTableView.addSubview(refreshControl)
+        
+        contentTableView.loadData(refresh: true)
+    }
+    
+    
+    
+    @objc func refresh(sender:AnyObject) {
+        downloadJSON(pageNumber: 1, completion: { [weak self] _ in
+            self?.contentTableView.reloadData()
+        })
+        refreshControl.endRefreshing()
+    }
+    
+    func downloadJSON(pageNumber: Int, completion: ((_ sucess: Bool) -> Void)? ) {
+        let url = URL(string: "http://199.247.31.99:4000/api/global-games?search=\(searchItem)&page=\(pageNumber)&limit=10")
+        print(searchItem)
+        guard let downloadURL = url else {return}
+        
+        URLSession.shared.dataTask(with: downloadURL) { (data, urlResponse, error) in
+            DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
+                guard let data = data else { return }
+                            
+                do {
+                    let decoder = JSONDecoder()
+                    let gamess = try decoder.decode(jsonFile.self, from: data)
+                    if pageNumber == 1 {
+                            self.games = gamess.data
+                    } else {
+                        self.games.append(contentsOf: gamess.data)
+                    }
+                    completion?(true)
+                    
+                } catch let jsonErr {
+                    print("Error serializing json:", jsonErr)
+                    completion?(false)
+                }
+            })
+        }.resume()
+    }
+    
+    func loadMore(_ pageNumber: Int, _ pageSize: Int, onSuccess: ((Bool) -> Void)?, onError: ((Error) -> Void)?) {
+        // Call your api here
+        // Send true in onSuccess in case new data exists, sending false will disable pagination
+        
+        // If page number is first, reset the list
+//        if pageNumber == 1 { games = [] }
+        downloadJSON(pageNumber: pageNumber) { (success) in
+            if success {
+                onSuccess?(true)
+            } else {
+                onError?(NSError(domain: "Unknown error", code: 101, userInfo: [:]))
             }
         }
+//         else append the data to list
+//        self.list.append(apiResponseList)
         
-        let filename = "imagexa.jpg"
-        let mimetype = "image/jpg"
-        
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        
-        body.append("Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: \(mimetype)\r\n\r\n".data(using: .utf8)!)
-        body.append(imageDataKey)
-        body.append("\r\n".data(using: .utf8)!)
-        
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        return body as Data
-    }
-    
-    func getUIImage(asset: PHAsset) -> UIImage? {//image attachment, image picker
-        
-        var img: UIImage?
-        let manager = PHImageManager.default()
-        let options = PHImageRequestOptions()
-        options.version = .original
-        options.isSynchronous = true
-        manager.requestImageData(for: asset, options: options) { data, _, _, _ in
-            
-            if let data = data {
-                img = UIImage(data: data)
-            }
-        }
-        return img
-    }
-}
+        // If Api responds with error
+//        onError?(apiError)
 
-extension ActivityViewController: AssetsPickerViewControllerDelegate {//image Attachment extension
-    
-    func assetsPickerCannotAccessPhotoLibrary(controller: AssetsPickerViewController) {
-        
+        // Else end success with flag true if more data available
+//        let moreDataAvailable = !apiResponseList.isEmpty
+//        onSuccess?(moreDataAvailable)
     }
     
-    func assetsPickerDidCancel(controller: AssetsPickerViewController) {
-        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return games.count
     }
     
-    func assetsPicker(controller: AssetsPickerViewController, selected assets: [PHAsset]) {
-        // do your job with selected assets
-        guard let asset = assets.first else { return }
-        let image = getUIImage(asset: asset)
-        uploadedImage.image = image
-        
-        /*
-        guard let asset2 = assets.second else { return }
-        let image2 = getUIImage(asset: asset2)
-        imageView2.image = image2
-        
-        guard let asset3 = assets.third else { return }
-        let image3 = getUIImage(asset: asset3)
-        imageView3.image = image3
-        */
-    }
-    func assetsPicker(controller: AssetsPickerViewController, shouldSelect asset: PHAsset, at indexPath: IndexPath) -> Bool {
-        return true
-    }
-    func assetsPicker(controller: AssetsPickerViewController, didSelect asset: PHAsset, at indexPath: IndexPath) {
-        
-    }
-    func assetsPicker(controller: AssetsPickerViewController, shouldDeselect asset: PHAsset, at indexPath: IndexPath) -> Bool {
-        return true
-    }
-    func assetsPicker(controller: AssetsPickerViewController, didDeselect asset: PHAsset, at indexPath: IndexPath) {}
-}
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! searchCell
 
+//        var src = games[indexPath.row].photos[0].src
+//        src = src.replacingOccurrences(of: "public/", with: "")
+        let url = URL(string: "https://bit.ly/2ZPFrgu")!
+
+        cell.searchImage.layer.cornerRadius = 10
+        cell.searchImage.af_setImage(withURL: url)
+        cell.searchName.text = games[indexPath.row].name
+        cell.searchGenre.text = games[indexPath.row].genres.joined(separator: ", ")
+
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let secondVC = storyboard.instantiateViewController(identifier: "SellGameViewController")
+                    
+        secondVC.modalPresentationStyle = .automatic
+        secondVC.modalTransitionStyle = .coverVertical
+                    
+        present(secondVC, animated: true, completion: nil)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchItem = (searchGame.text?.lowercased())!
+        //print(searchItem)
+        refresh(sender: refreshControl)
+
+    }
+    
+}
